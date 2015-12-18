@@ -1,0 +1,4 @@
+*.xcuserstate
+*.xcbkptlist
+*.xcodeproj/xcuserdata/
+.DS_Store
