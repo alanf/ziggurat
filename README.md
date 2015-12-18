@@ -1,6 +1,6 @@
 # Ziggurat Example App
 
-This is a (spartan) example app to illustrate the components of a Ziggurat app architecture and how they fit together. This app architecture is being used at Square to improve testability and prevent massive view controllers.
+This is a (spartan) example app to illustrate the components of a [Ziggurat app architecture](https://corner.squareup.com/2015/12/ziggurat-ios-app-architecture.html) and how they fit together. This app architecture is being used at Square to improve testability and prevent massive view controllers.
 
 This app only does one thing, which is add a pre-computed discount amount to a cart.
 
