@@ -19,7 +19,7 @@ protocol RootPresenterContext: CartPresenterContext {
 
 struct RootPresenter {
 
-    static func present(context:RootPresenterContext) -> RootViewModel {
+    static func present(_ context:RootPresenterContext) -> RootViewModel {
         let cartViewModel = CartPresenter.present(context)
         return RootViewModel(cart: cartViewModel)
     }    

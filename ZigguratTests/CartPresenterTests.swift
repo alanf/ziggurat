@@ -20,7 +20,7 @@ class CartPresenterTests: XCTestCase {
     
     struct TestCartPresenterContext: CartPresenterContext {
         var cartService:CartService
-        var locale:NSLocale { return NSLocale(localeIdentifier: "US") }
+        var locale:Locale { return Locale(identifier: "US") }
     }
     
     func testDiscountViewModel() {
