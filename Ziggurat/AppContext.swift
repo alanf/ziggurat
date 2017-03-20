@@ -32,20 +32,20 @@ protocol ViewControllerFactory {
 /// There are many approaches to dependency injection, and plenty more to say on the subject, but for the sake of brevity, let's move on...
 class AppContext: RootPresenterContext, ViewControllerFactory {
     
-    private(set) lazy var window = UIWindow()
-    private(set) lazy var locale = NSLocale.currentLocale()
+    fileprivate(set) lazy var window = UIWindow()
+    fileprivate(set) lazy var locale = Locale.current
     
-    private(set) lazy var rootViewController:RootViewController = RootViewController(viewControllerFactory: self)
+    fileprivate(set) lazy var rootViewController:RootViewController = RootViewController(viewControllerFactory: self)
     
-    private(set) lazy var cartService:CartService = CartService(signal: self.renderer.render)
+    fileprivate(set) lazy var cartService:CartService = CartService(signal: self.renderer.render)
     
-    private(set) lazy var renderer:RootViewRenderer = RootViewRenderer(window: self.window, presenterContext: self)
+    fileprivate(set) lazy var renderer:RootViewRenderer = RootViewRenderer(window: self.window, presenterContext: self)
     
-    private(set) lazy var httpRepository:HTTPRepository = HTTPRepository(session: self.session)
-    private(set) lazy var session:NSURLSession = NSURLSession(
-        configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
+    fileprivate(set) lazy var httpRepository:HTTPRepository = HTTPRepository(session: self.session)
+    fileprivate(set) lazy var session:URLSession = URLSession(
+        configuration: URLSessionConfiguration.default,
         delegate: nil,
-        delegateQueue: NSOperationQueue()
+        delegateQueue: OperationQueue()
     )
     
     func orderEntryViewController() -> OrderEntryViewController {

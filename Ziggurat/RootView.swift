@@ -10,9 +10,9 @@ import UIKit
 /// The view at the root of it all.
 class RootView: UIView {
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         
-        userInteractionEnabled = true
+        isUserInteractionEnabled = true
         translatesAutoresizingMaskIntoConstraints = false
     }
     

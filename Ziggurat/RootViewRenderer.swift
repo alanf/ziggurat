@@ -28,7 +28,7 @@ class RootViewRenderer {
     
     func render() {
         // For production, there's logic to remove extraneous render calls in a single run loop.
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             if let rvc = self.window.rootViewController as? RootViewController {
                 let rootViewModel = RootPresenter.present(self.rootPresenterContext)
                 rvc.update(rootViewModel)

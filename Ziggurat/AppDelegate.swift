@@ -14,11 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// The object graph used to bootstrap the application.
     let context = AppContext()
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         let window = context.window
         window.makeKeyAndVisible()
-        window.frame = UIScreen.mainScreen().bounds
+        window.frame = UIScreen.main.bounds
         window.becomeFirstResponder()
         window.rootViewController = context.rootViewController
         

@@ -8,10 +8,10 @@
 import UIKit
 
 extension UIViewController {
-    func addChild(child: UIViewController) {
-        precondition(child.parentViewController == nil, "Child already has a parent")
+    func addChild(_ child: UIViewController) {
+        precondition(child.parent == nil, "Child already has a parent")
         addChildViewController(child)
-        child.didMoveToParentViewController(self)
+        child.didMove(toParentViewController: self)
     }
 }
 
@@ -40,7 +40,7 @@ class RootViewController: UIViewController {
         AutolayoutUtil.fill(orderEntryViewController.view)
     }
     
-    func update(viewModel: RootViewModel) {
+    func update(_ viewModel: RootViewModel) {
         orderEntryViewController.update(viewModel.cart)
     }
 }

@@ -29,14 +29,14 @@ struct CartViewModel {
 /// The dependencies of the CartPresenter are described in this protocol to simplify dependency injection.
 protocol CartPresenterContext {
     var cartService:CartService { get }
-    var locale:NSLocale { get }
+    var locale:Locale { get }
 }
 
 /// Generates a view model for displaying the cart based primarily on querying the CartService.
 struct CartPresenter {
     
     /// A stateless function which queries the entities provided in the context to generate a view model.
-    static func present(context:CartPresenterContext) -> CartViewModel {
+    static func present(_ context:CartPresenterContext) -> CartViewModel {
         var discounts:[CartViewModel.LineItem] = []
         for discount in context.cartService.cart.discounts {
             let price = try? MoneyUtil.formattedString(discount.amount, locale: context.locale)

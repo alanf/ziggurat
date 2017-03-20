@@ -13,22 +13,22 @@ class OrderEntryView: UIView {
     let addDiscountButton:UIButton
     
     init() {
-        addDiscountButton = UIButton(frame: CGRectZero)
+        addDiscountButton = UIButton(frame: CGRect.zero)
         addDiscountButton.translatesAutoresizingMaskIntoConstraints = false
         addDiscountButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        addDiscountButton.exclusiveTouch = true
-        addDiscountButton.setTitle("Add a Discount", forState: .Normal)
-        addDiscountButton.userInteractionEnabled = true
-        addDiscountButton.backgroundColor = UIColor.blueColor()
+        addDiscountButton.isExclusiveTouch = true
+        addDiscountButton.setTitle("Add a Discount", for: UIControlState())
+        addDiscountButton.isUserInteractionEnabled = true
+        addDiscountButton.backgroundColor = UIColor.blue
         
         cart = UITableView()
         cart.translatesAutoresizingMaskIntoConstraints = false
-        cart.tableFooterView = UIView(frame: CGRectZero)
-        cart.backgroundColor = UIColor.lightGrayColor()
+        cart.tableFooterView = UIView(frame: CGRect.zero)
+        cart.backgroundColor = UIColor.lightGray
         
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         
-        userInteractionEnabled = true
+        isUserInteractionEnabled = true
         translatesAutoresizingMaskIntoConstraints = false
         addSubview(addDiscountButton)
         addSubview(cart)
@@ -36,10 +36,10 @@ class OrderEntryView: UIView {
         let views = [
             "cart": cart,
             "addDiscountButton": addDiscountButton,
-        ]
+        ] as [String : Any]
         
-        addConstraints(AutolayoutUtil.constraintsWithVisualFormat("V:|-20-[addDiscountButton(40)]-[cart]-20-|", options: .AlignAllCenterX, views: views))
-        addConstraints(AutolayoutUtil.constraintsWithVisualFormat("H:|[cart]|", options: .AlignAllCenterX, views: views))
+        addConstraints(AutolayoutUtil.constraintsWithVisualFormat("V:|-20-[addDiscountButton(40)]-[cart]-20-|", options: .alignAllCenterX, views: views as [String : AnyObject]))
+        addConstraints(AutolayoutUtil.constraintsWithVisualFormat("H:|[cart]|", options: .alignAllCenterX, views: views as [String : AnyObject]))
         AutolayoutUtil.centerX(addDiscountButton)
     }
     

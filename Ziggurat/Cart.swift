@@ -20,15 +20,15 @@ struct Cart {
     }
     
     /// A cart can have multiple discounts applied to it.
-    private(set) var discounts:[Discount] = []
+    fileprivate(set) var discounts:[Discount] = []
     
     /// Add a discount to the list of cart discounts.
-    mutating func addDiscount(discount:Discount) {
+    mutating func addDiscount(_ discount:Discount) {
         discounts.append(discount)
     }
     
     /// Remove all discounts with a matching UUID.
-    mutating func removeDiscount(UUID:String) {
+    mutating func removeDiscount(_ UUID:String) {
         discounts = discounts.filter { $0.UUID != UUID }
     }
 }

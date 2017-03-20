@@ -13,7 +13,7 @@ import Foundation
 /// To preserve the one-way data flow of Ziggurat app architecture, view controllers are not allowed to query the Service layer.
 /// i.e. view controllers can only be told what to do, they never ask--but they inform a service of new input.
 protocol DiscountEditable {
-    func addAmountDiscount(amount: String)
+    func addAmountDiscount(_ amount: String)
 }
 
 /// Manages the Cart model. Contains business logic for manipulating Cart.
@@ -22,7 +22,7 @@ protocol DiscountEditable {
 class CartService: DiscountEditable {
 
     let signal:SignalUpdate
-    init(signal:SignalUpdate) {
+    init(signal:@escaping SignalUpdate) {
         self.signal = signal
     }
     
@@ -31,32 +31,32 @@ class CartService: DiscountEditable {
     /// To reduce the footprint of this Service, this state could be moved into its own separate service.
     /// This may seem like something that should be part of the view model, but the view model is transient and stateless.
     enum CartEditingState {
-        case None
-        case AddingDiscount
+        case none
+        case addingDiscount
     }
     
-    private(set) var cart = Cart()
-    private var cartEditingState:CartEditingState = .None
+    fileprivate(set) var cart = Cart()
+    fileprivate var cartEditingState:CartEditingState = .none
     
-    func editingDiscount(isEditing:Bool) {
-        precondition(NSThread.isMainThread())
+    func editingDiscount(_ isEditing:Bool) {
+        precondition(Thread.isMainThread)
         if isEditing {
-            cartEditingState = .AddingDiscount
-        } else if cartEditingState == .AddingDiscount {
-            cartEditingState = .None
+            cartEditingState = .addingDiscount
+        } else if cartEditingState == .addingDiscount {
+            cartEditingState = .none
         }
         
         signal()
     }
     
-    func addAmountDiscount(amount: String) {
-        precondition(NSThread.isMainThread())
+    func addAmountDiscount(_ amount: String) {
+        precondition(Thread.isMainThread)
         
         do {
             let discountAmount = try MoneyUtil.moneyFromString(amount, currency: Money.Currency.USD)
-            let discount = Cart.Discount(UUID: NSUUID().UUIDString, name: "Coupon", amount:discountAmount)
+            let discount = Cart.Discount(UUID: UUID().uuidString, name: "Coupon", amount:discountAmount)
             cart.addDiscount(discount)
-            cartEditingState = .None
+            cartEditingState = .none
         } catch {
             // set invalid discount error on notification service, which would trigger an error notification
         }
